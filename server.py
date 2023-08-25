@@ -1,19 +1,17 @@
 import socket
 
-Host = socket.gethostbyname(socket.gethostname())
+Host = '127.0.8.1'
 Port = 9999
 print("the server is available")
 server_socket= socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind((Host, Port))
-global number
-number = 0
 
 while True:
-    number, client_address = server_socket.recvfrom(1024)
-    if number == "exit":
+    data, client_address = server_socket.recvfrom(1024)
+    if data == "exit":
             break
     else:
-        print(f"{number.decode()} is received")
-        server_socket.sendto(number.encode(), client_address)
+        print(f"{data.decode()} is received")
+        server_socket.sendto(data, client_address)
 server_socket.close()
 

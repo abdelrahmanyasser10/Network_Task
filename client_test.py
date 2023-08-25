@@ -1,16 +1,20 @@
 import socket
 
-Host = '127.0.1.1'
+Host = '127.0.8.1'
 Port = 9999
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-number = 0
 
-client_socket.sendto(number, (Host, Port))
+number = 0
+number_bytes = str(number).encode()
+
+client_socket.sendto(number_bytes, (Host, Port))
 
 while True:
-    if client_socket.recvfrom(1024)[0].decode() == str(number):
-        client_socket.sendto(str(number).encode(), (Host, Port))
+    if int(client_socket.recvfrom(1024)[0].decode()) == number:
+        number = number + 1
+        number_bytes = str(number).encode()
+        client_socket.sendto(number_bytes, (Host, Port))
     else:
         break
 
