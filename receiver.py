@@ -13,8 +13,8 @@ while True:
     if not data:
             break
     else:
-        print(f"{data.decode()} is received")
-        next_packet = int(data.decode())
+        print(f"{data.decode('utf-8')} is received")
+        next_packet = int(data.decode('utf-8'))
         server_socket.sendto(data, client_address)
     if next_packet == last_packet + 1:
         last_packet = next_packet
