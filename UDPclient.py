@@ -6,6 +6,8 @@ socket_c.connect((' 127.0.8.1'), 9999 ) #address and port id of server
 starting_number =0
 while 1:
     starting_number+=1
-    socket_c.sendto(starting_number.encode('utf-8'),9999)
+    socket_c.sendto(str(starting_number).encode('utf-8'),9999)
     server_msg=socket_c.recvfrom(1024)
     print(server_msg[0])
+
+socket_c.close()
