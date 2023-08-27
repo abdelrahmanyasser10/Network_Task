@@ -1,7 +1,7 @@
 import socket as sk
 import os as os
 
-Host = '127.0.5.1' # The IP address should match the server's IP address
+Host = '127.0.11.1' # The IP address should match the server's IP address
 Port = 9999
 client_socket=sk.socket(sk.AF_INET,sk.SOCK_DGRAM)
 client_socket.connect((Host, Port)) #address and port id of server
