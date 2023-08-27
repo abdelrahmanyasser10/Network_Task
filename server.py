@@ -9,8 +9,41 @@ print("the server is available")
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind((Host, Port))
 
+file_name ='test.txt'
+with open(file_name, 'a') as f:
+    for _ in range(0, 100):
+        f.write('\n')
+
+with open(file_name, 'r') as f:
+    lines = f.readlines()
 
 
+with open(file_name, 'w') as f:
+    f.write(lines[0]) #new line
+    for line in lines[1:]:
+        random_number = random.randrange(0,100)
+        f.write(str(random_number) + line)
+
+
+with open(file_name, 'r') as f:
+    lines = f.readlines()
+
+
+with open(file_name, 'w') as f:
+    f.write(lines[0])
+    for line in lines[1:]:
+        random_char = random.choice(string.ascii_letters)
+        f.write(random_char + line)
+
+
+global file_size
+try:
+    file_size = os.path.getsize(file_name)
+    print(f"File Size in Bytes is {file_size}")
+except FileNotFoundError:
+    print("File not found.")
+except OSError:
+    print("OS error occurred.")
 
 count = 0
 
@@ -32,39 +65,3 @@ while True:
         break
 server_socket.close()
 
-
-
-def generate_file():
-    file_name = 'test.txt'
-    with open(file_name, 'a') as f:
-        for _ in range(0, 100):
-            f.write('\n')
-
-    with open(file_name, 'r') as f:
-        lines = f.readlines()
-
-    with open(file_name, 'w') as f:
-        f.write(lines[0])  # new line
-        for line in lines[1:]:
-            random_number = random.randrange(0, 100)
-            f.write(str(random_number) + line)
-
-    with open(file_name, 'r') as f:
-        lines = f.readlines()
-
-    with open(file_name, 'w') as f:
-        f.write(lines[0])
-        for line in lines[1:]:
-            random_char = random.choice(string.ascii_letters)
-            f.write(random_char + line)
-    return file_name
-def get_file_size():
-    try:
-        file_name = 
-        file_size = os.path.getsize(file_name)
-        print(f"File Size in Bytes is {file_size}")
-    except FileNotFoundError:
-        print("File not found.")
-    except OSError:
-        print("OS error occurred.")
-    return file_size
