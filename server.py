@@ -9,7 +9,7 @@ print("the server is available")
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind((Host, Port))
 
-file_name ='server.txt'
+file_name ='test.txt'
 with open(file_name, 'a') as f:
     for _ in range(0, 100):
         f.write('\n')
