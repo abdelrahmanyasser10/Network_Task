@@ -61,6 +61,7 @@ while True:
                 packet = server_socket.sendto(byte, receiver_address)
                 count += 1
                 byte = f.read(1)
+        print(f"{count} of bytes sent")
         break
 server_socket.close()
 
