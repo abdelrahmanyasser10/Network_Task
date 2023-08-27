@@ -1,23 +1,13 @@
-import socket
+import socket as sk
 
-Host = '127.0.8.1'
-Port = 9999
-print("the server is available")
-server_socket= socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.bind((Host, Port))
+socket_c=sk.socket(sk.AF_INET,sk.SOCK_DGRAM)
+socket_c.connect((' 127.0.8.1'), 9999 ) #address and port id of server
 
-last_packet = 0
+starting_number =0
+while 1:
+    starting_number+=1
+    socket_c.sendto(str(starting_number).encode('utf-8'),9999)
+    server_msg=socket_c.recvfrom(1024)
+    print(server_msg[0])
 
-while True:
-    data, client_address = server_socket.recvfrom(1024)
-    if not data:
-            break
-    else:
-        print(f"{data.decode('utf-8')} is received")
-        next_packet = int(data.decode('utf-8'))
-        server_socket.sendto(data, client_address)
-    if next_packet == last_packet + 1:
-        last_packet = next_packet
-
-server_socket.close()
-
+socket_c.close()
