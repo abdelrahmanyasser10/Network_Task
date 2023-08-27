@@ -3,7 +3,7 @@ import os
 import random
 import string
 
-Host = '127.0.1.1'
+Host = '127.0.5.1'
 Port = 9999
 print("the server is available")
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -50,8 +50,9 @@ count = 0
 
 while True:
     requested_packet, receiver_address = server_socket.recvfrom(1024)
-    if requested_packet == '0':
+    if requested_packet == b'0':
         server_socket.sendto(str(file_size).encode('utf-8'), receiver_address)
+        print(f"{file_size} is sent")
 
     else:
         with open(file_name, 'rb') as f:
